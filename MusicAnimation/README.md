@@ -32,7 +32,7 @@ An audio-reactive symmetric wave visualizer rendered on your desktop with **Conk
 2. **Copy the project anywhere you like** — all paths are relative, so it works from any location with no configuration:
 
    ```bash
-   git clone <this-repo>
+   git clone https://github.com/your-user/your-repo
    # or just copy the folder somewhere, e.g.:
    cp -r music-animation ~/.config/conky/music-animation
    ```

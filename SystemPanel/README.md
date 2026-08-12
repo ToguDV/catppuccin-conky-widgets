@@ -3,14 +3,14 @@
 Desktop widget (Conky) with a large clock and system monitor: CPU, RAM, swap and disk usage bars, in the same Catppuccin Mocha style as `YearProgressBar`.
 
 ```
-           22:54          ← rosa, size 30
-       Sáb 09 Ago 2026     ← gris, size 9
+           22:54          ← pink, size 30
+       Sat 09 Aug 2026     ← gray, size 9
 ──────────────────────────
-CPU  ██████████░░░░░░░░░░  42   ← barra morada, % rosa
+CPU  ██████████░░░░░░░░░░  42   ← purple bar, pink %
 MEM  ████████░░░░░░░░░░░░  33
-SWP  ░░░░░░░░░░░░░░░░░░░░   2   (si swap=0, la línea no se dibuja)
+SWP  ░░░░░░░░░░░░░░░░░░░░   2   (if swap=0, the line is not drawn)
 ROOT ██████████████░░░░░░  71
-DATA █████████░░░░░░░░░░░  45
+DATA █████████░░░░░░░░░░░  45   (only if DATA_DISK is set)
 ```
 
 ## Requirements
@@ -69,6 +69,17 @@ The `conkyrc` file controls everything:
 - `own_window_argb_value`: background opacity (165 default)
 - Colors: Catppuccin Mocha (`#cba6f7` bars, `#f5c2e7` clock/percentages, `#cdd6f4` text, `#a6adc8` labels/dates, `#313244` separator)
 - `update_interval`: refresh interval in seconds
+
+### Extra data disk (`DATA_DISK`)
+
+To monitor a second disk (e.g. a data partition), set the `DATA_DISK` environment variable before starting the widget. The line is only shown when the disk is mounted:
+
+```bash
+export DATA_DISK=/mnt/datos
+./start.sh -d
+```
+
+Leave it unset (the default) to hide the line.
 
 Reload **only this widget** (never `killall conky`, it would kill the music visualizer):
 

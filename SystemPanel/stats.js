@@ -5,6 +5,7 @@ const fs = require('fs');
 const os = require('os');
 const BAR_WIDTH = 20;
 const CPU_CACHE = '/tmp/sp-cpu.json';
+const DATA_DISK = process.env.DATA_DISK || '';
 
 function pct(used, total) {
   return total > 0 ? Math.round((used / total) * 100) : 0;
@@ -109,8 +110,8 @@ if (flag === '--cpu') {
   const p = diskPct(f2 || '/');
   if (p >= 0) pctOut(p);
 } else if (flag === '--date') {
-  const WEEK = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-  const MONTHS = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+  const WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const d = new Date();
   const day = String(d.getDate()).padStart(2, '0');
   console.log(`${WEEK[d.getDay()]} ${day} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`);
@@ -119,6 +120,10 @@ if (flag === '--cpu') {
   const sp = swapPct();
   if (sp >= 0) console.log(line('SWP', sp));
   console.log(line('ROOT', diskPct('/')));
-  console.log(line('DATA', diskPct('/mnt/datos')));
+  if (DATA_DISK) {
+    try {
+      console.log(line('DATA', diskPct(DATA_DISK)));
+    } catch (e) {}
+  }
   console.log(line('CPU', sampleCpu()));
 }

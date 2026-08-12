@@ -24,6 +24,18 @@ conky.config = {
   minimum_width = 260
 }
 
+-- Optional extra disk to monitor. Set DATA_DISK before running start.sh:
+--   export DATA_DISK=/mnt/datos
+-- The line is only shown when the variable is set and the disk is mounted.
+local data_disk = os.getenv('DATA_DISK') or ''
+local data_block = ''
+if data_disk ~= '' then
+  data_block = '${if_mounted ' .. data_disk .. '}' ..
+    '${color #cba6f7}${execpi 60 ./stats.js --disk-bar ' .. data_disk .. '}' ..
+    '${color #f5c2e7}${execpi 60 ./stats.js --disk-pct ' .. data_disk .. '}' ..
+    '${color}${endif}'
+end
+
 conky.text = [[
 ${voffset 6}${alignc}${font DejaVu Sans Mono:size=30}${color #f5c2e7}${time %H:%M}${color}
 ${voffset -4}${font DejaVu Sans Mono:size=9}${alignc}${color #a6adc8}${execpi 60 ./stats.js --date}${color}
@@ -32,6 +44,6 @@ ${voffset 2}${font DejaVu Sans Mono:size=10}${color #cba6f7}${execpi 60 ./stats.
 ${color #cba6f7}${execpi 60 ./stats.js --mem-bar}${color #f5c2e7}${execpi 60 ./stats.js --mem-pct}${color}
 ${color #cba6f7}${execpi 60 ./stats.js --swap-bar}${color #f5c2e7}${execpi 60 ./stats.js --swap-pct}${color}
 ${color #cba6f7}${execpi 60 ./stats.js --disk-bar /}${color #f5c2e7}${execpi 60 ./stats.js --disk-pct /}${color}
-${if_mounted /mnt/datos}${color #cba6f7}${execpi 60 ./stats.js --disk-bar /mnt/datos}${color #f5c2e7}${execpi 60 ./stats.js --disk-pct /mnt/datos}${color}${endif}
+]] .. data_block .. [[
 ${voffset 6}
 ]]

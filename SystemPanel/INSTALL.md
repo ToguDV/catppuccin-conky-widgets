@@ -16,7 +16,7 @@ Installation guide for the SystemPanel desktop widget (clock + system monitor fo
 Clone or copy the `SystemPanel` folder anywhere — all paths inside are relative, so there is nothing to configure:
 
 ```bash
-git clone <this-repo> ~/.config/conky
+git clone https://github.com/your-user/your-repo ~/.config/conky
 # or: cp -r SystemPanel /any/where/you/like
 ```
 
@@ -27,7 +27,7 @@ cd /path/to/SystemPanel
 ./stats.js
 ```
 
-You should see MEM/SWP/ROOT/DATA/CPU lines with bars and percentages. (If a DATA disk is not mounted, that line is simply skipped.)
+You should see MEM/SWP/ROOT/CPU lines with bars and percentages. A DATA line appears only if you set `DATA_DISK` (see [Customization](#5-customization)).
 
 ## 2. Start the widget
 
@@ -82,7 +82,7 @@ Test each metric against system tools:
 ./stats.js --disk / && df -h /
 ```
 
-If values look wrong, check the widget log: `tail -f /tmp/sp-conky.err`.
+If values look wrong, run `./start.sh` in the foreground (without `-d`) and read the errors on the terminal.
 
 ## 5. Customization
 
@@ -92,7 +92,17 @@ Everything is configured in `conkyrc`:
 - `own_window_argb_value`: background opacity (165 default; 255 = opaque)
 - `update_interval`: refresh interval in seconds
 - Colors (Catppuccin Mocha): `#cba6f7` bars, `#f5c2e7` clock/percentages, `#a6adc8` labels/dates, `#cdd6f4` text, `#313244` separator
-- The DATA disk line is shown only when its mount point exists (`${if_mounted /mnt/datos}`); change the path to your own data disk, or delete the line entirely
+
+### Extra data disk (`DATA_DISK`)
+
+To show a second disk (e.g. a data partition), set the `DATA_DISK` environment variable before starting the widget. The line only appears when the disk is mounted:
+
+```bash
+export DATA_DISK=/mnt/datos
+./start.sh -d
+```
+
+Leave it unset to hide the line. The same variable is used by `stats.js` in its demo output (`./stats.js`).
 
 ## 6. Uninstall
 

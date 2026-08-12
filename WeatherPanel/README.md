@@ -3,14 +3,14 @@
 Desktop widget (Conky) with the current weather and 5-day forecast, in the same Catppuccin Mocha style as `YearProgressBar` and `SystemPanel`.
 
 ```
-      \   /     Sunny        ← ASCII art de wttr.in (curl)
+      \   /     Sunny        ← wttr.in ASCII art (curl)
        .-.      +29(27) °C
     ― (   ) ―   ← 6 km/h
        `-’      10 km
       /   \     0.0 mm
 ──────────────────────────
-Medellín, CO               ← gris
-Today  ☁ Cloudy    30°/16° ← texto, temp rosa a la derecha
+Medellín, CO               ← gray
+Today  ☁ Cloudy    30°/16° ← text, pink temperature on the right
 Tue    ◑ Partly cloudy 31°/17°
 Wed    ☁ Cloudy     30°/16°
 Thu    ☂ Showers    29°/16°
