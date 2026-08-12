@@ -118,7 +118,7 @@ function printBlock({ data }) {
   const line = (art, text) => console.log(art.padEnd(11) + text);
   line('    \\   /', `${sym} ${label}`);
   line('     .-.', `${Math.round(c.temperature_2m)}° (${Math.round(c.apparent_temperature)}°)`);
-  console.log('  (   )       ' + '←' + ` ${Math.round(c.wind_speed_10m)} km/h ${windDir(c.wind_direction_10m)}`);
+  line('  ― (   ) ― ', `← ${Math.round(c.wind_speed_10m)} km/h ${windDir(c.wind_direction_10m)}`);
   line('     `-´', `${c.relative_humidity_2m}%`);
   line('    /   \\', `${c.precipitation} mm`);
 }
