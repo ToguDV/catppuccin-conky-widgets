@@ -25,17 +25,17 @@ conky.config = {
 }
 
 conky.text = [[
-${voffset 4}${color #f9e2af}${execpi 3600 /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/wttr-line.sh 1 1-11}${color #cdd6f4}${execpi 3600 /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/wttr-line.sh 1 12-}
-${execpi 3600 /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/wttr-line.sh 2}
-${execpi 3600 /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/wttr-line.sh 3}
-${execpi 3600 /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/wttr-line.sh 4}
-${color #f9e2af}${execpi 3600 /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/wttr-line.sh 5 1-11}${color #cdd6f4}${execpi 3600 /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/wttr-line.sh 5 12-}
+${voffset 4}${color #f9e2af}${execpi 3600 ./wttr-line.sh 1 1-11}${color #cdd6f4}${execpi 3600 ./wttr-line.sh 1 12-}
+${execpi 3600 ./wttr-line.sh 2}
+${execpi 3600 ./wttr-line.sh 3}
+${execpi 3600 ./wttr-line.sh 4}
+${color #f9e2af}${execpi 3600 ./wttr-line.sh 5 1-11}${color #cdd6f4}${execpi 3600 ./wttr-line.sh 5 12-}
 ${voffset 4}${color #313244}${hr}${color}
-${voffset 2}${color #a6adc8}${execpi 3600 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/weather.js --loc}${color}
-${color #cdd6f4}${execpi 3600 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/weather.js --day 0}${alignr}${color #f5c2e7}${execpi 3600 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/weather.js --temps 0}${color}
-${color #cdd6f4}${execpi 3600 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/weather.js --day 1}${alignr}${color #f5c2e7}${execpi 3600 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/weather.js --temps 1}${color}
-${color #cdd6f4}${execpi 3600 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/weather.js --day 2}${alignr}${color #f5c2e7}${execpi 3600 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/weather.js --temps 2}${color}
-${color #cdd6f4}${execpi 3600 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/weather.js --day 3}${alignr}${color #f5c2e7}${execpi 3600 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/weather.js --temps 3}${color}
-${color #cdd6f4}${execpi 3600 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/weather.js --day 4}${alignr}${color #f5c2e7}${execpi 3600 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/weather.js --temps 4}${color}
+${voffset 2}${color #a6adc8}${execpi 3600 ./weather.js --loc}${color}
+${color #cdd6f4}${execpi 3600 ./weather.js --day 0}${alignr}${color #f5c2e7}${execpi 3600 ./weather.js --temps 0}${color}
+${color #cdd6f4}${execpi 3600 ./weather.js --day 1}${alignr}${color #f5c2e7}${execpi 3600 ./weather.js --temps 1}${color}
+${color #cdd6f4}${execpi 3600 ./weather.js --day 2}${alignr}${color #f5c2e7}${execpi 3600 ./weather.js --temps 2}${color}
+${color #cdd6f4}${execpi 3600 ./weather.js --day 3}${alignr}${color #f5c2e7}${execpi 3600 ./weather.js --temps 3}${color}
+${color #cdd6f4}${execpi 3600 ./weather.js --day 4}${alignr}${color #f5c2e7}${execpi 3600 ./weather.js --temps 4}${color}
 ${voffset 6}
 ]]

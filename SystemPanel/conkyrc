@@ -26,12 +26,12 @@ conky.config = {
 
 conky.text = [[
 ${voffset 6}${alignc}${font DejaVu Sans Mono:size=30}${color #f5c2e7}${time %H:%M}${color}
-${voffset -4}${font DejaVu Sans Mono:size=9}${alignc}${color #a6adc8}${execpi 60 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel/stats.js --date}${color}
+${voffset -4}${font DejaVu Sans Mono:size=9}${alignc}${color #a6adc8}${execpi 60 ./stats.js --date}${color}
 ${voffset 4}${color #313244}${hr}${color}
-${voffset 2}${font DejaVu Sans Mono:size=10}${color #cba6f7}${execpi 60 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel/stats.js --cpu-bar}${color #f5c2e7}${execpi 60 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel/stats.js --cpu-pct}${color}
-${color #cba6f7}${execpi 60 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel/stats.js --mem-bar}${color #f5c2e7}${execpi 60 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel/stats.js --mem-pct}${color}
-${color #cba6f7}${execpi 60 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel/stats.js --swap-bar}${color #f5c2e7}${execpi 60 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel/stats.js --swap-pct}${color}
-${color #cba6f7}${execpi 60 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel/stats.js --disk-bar /}${color #f5c2e7}${execpi 60 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel/stats.js --disk-pct /}${color}
-${color #cba6f7}${execpi 60 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel/stats.js --disk-bar /mnt/datos}${color #f5c2e7}${execpi 60 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel/stats.js --disk-pct /mnt/datos}${color}
+${voffset 2}${font DejaVu Sans Mono:size=10}${color #cba6f7}${execpi 60 ./stats.js --cpu-bar}${color #f5c2e7}${execpi 60 ./stats.js --cpu-pct}${color}
+${color #cba6f7}${execpi 60 ./stats.js --mem-bar}${color #f5c2e7}${execpi 60 ./stats.js --mem-pct}${color}
+${color #cba6f7}${execpi 60 ./stats.js --swap-bar}${color #f5c2e7}${execpi 60 ./stats.js --swap-pct}${color}
+${color #cba6f7}${execpi 60 ./stats.js --disk-bar /}${color #f5c2e7}${execpi 60 ./stats.js --disk-pct /}${color}
+${if_mounted /mnt/datos}${color #cba6f7}${execpi 60 ./stats.js --disk-bar /mnt/datos}${color #f5c2e7}${execpi 60 ./stats.js --disk-pct /mnt/datos}${color}${endif}
 ${voffset 6}
 ]]

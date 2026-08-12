@@ -6,7 +6,7 @@ conky.config = {
     xinerama_head = 0,
 
     -- DO NOT modify below unless you know what you are doing
-    lua_load = '/mnt/datos/Proyectos/Shell/Conky/Main/MusicAnimation/visualizer.lua',
+    lua_load = './visualizer.lua',
     lua_startup_hook = 'setup_visualizer',
     lua_draw_hook_pre = 'preload_visualizer',
     lua_shutdown_hook = 'shutdown_visualizer',
