@@ -2,6 +2,8 @@
 
 A collection of independent desktop widgets for Linux, powered by [Conky](https://github.com/brndnmtthws/conky). All in the same Catppuccin Mocha style, and all portable: no fixed folder structure, no hardcoded paths, no configuration required to get started.
 
+![Preview](preview.png)
+
 | Widget | What it does | Extras needed |
 |---|---|---|
 | [YearProgressBar](YearProgressBar/) | Year progress bar, percentage, days left | Node.js (Conky optional) |
