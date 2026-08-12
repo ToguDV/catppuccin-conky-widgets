@@ -27,11 +27,14 @@ Fri    ☂ Drizzle    31°/17°
 
 ## Installation
 
-Start the widget:
+Copy the `WeatherPanel` folder anywhere (all paths are relative). Start the widget from inside the folder:
 
 ```bash
-conky -c /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/conkyrc -d
+cd /path/to/WeatherPanel
+./start.sh -d
 ```
+
+(`./start.sh` without `-d` runs in the foreground, useful to see errors.)
 
 **Autostart on login** (`~/.config/autostart/weatherpanel.desktop`):
 
@@ -40,7 +43,7 @@ conky -c /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/conkyrc -d
 Type=Application
 Name=Conky Weather Panel
 Comment=Weather widget
-Exec=conky -c /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/conkyrc -d
+Exec=/path/to/WeatherPanel/start.sh -d
 X-GNOME-Autostart-enabled=true
 ```
 
@@ -99,7 +102,7 @@ Reload **only this widget** (never `killall conky`, it would kill the music visu
 
 ```bash
 pkill -f 'WeatherPanel/conkyrc'
-conky -c /mnt/datos/Proyectos/Shell/Conky/Main/WeatherPanel/conkyrc -d
+cd /path/to/WeatherPanel && ./start.sh -d
 ```
 
 ## Project structure

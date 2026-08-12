@@ -4,7 +4,7 @@ Installation guide for the SystemPanel desktop widget (clock + system monitor fo
 
 ## Requirements
 
-- **Node.js** (tested with v24; any modern version should work)
+- **Node.js** (tested with v24; any modern version should work) — `start.sh` finds it automatically if you use [nvm](https://github.com/nvm-sh/nvm); otherwise `node` must be in your `PATH`
 - **Conky** 1.19+ — install with:
   ```bash
   sudo apt install conky-all
@@ -13,30 +13,27 @@ Installation guide for the SystemPanel desktop widget (clock + system monitor fo
 
 ## 1. Install the widget
 
-Clone or copy the `SystemPanel` folder anywhere, e.g.:
+Clone or copy the `SystemPanel` folder anywhere — all paths inside are relative, so there is nothing to configure:
 
 ```bash
-cp -r /path/to/SystemPanel /mnt/datos/Proyectos/Shell/Conky/Main/
+git clone <this-repo> ~/.config/conky
+# or: cp -r SystemPanel /any/where/you/like
 ```
 
-Make sure `stats.js` is executable:
+Verify the script works:
 
 ```bash
-chmod +x /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel/stats.js
+cd /path/to/SystemPanel
+./stats.js
 ```
 
-Verify it works:
-
-```bash
-node /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel/stats.js
-```
-
-You should see MEM/SWP/ROOT/DATA/CPU lines with bars and percentages.
+You should see MEM/SWP/ROOT/DATA/CPU lines with bars and percentages. (If a DATA disk is not mounted, that line is simply skipped.)
 
 ## 2. Start the widget
 
 ```bash
-conky -c /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel/conkyrc -d
+./start.sh          # foreground — useful to see errors
+./start.sh -d       # background / daemon
 ```
 
 ### Positioning
@@ -48,7 +45,7 @@ The widget sits at `top_right` with `gap_x = 40` and `gap_y = 165`, which places
 Linux Mint: **Menu → Preferences → Startup Applications** → Add:
 
 - Name: `Conky System Panel`
-- Command: `conky -c /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel/conkyrc -d`
+- Command: `/path/to/SystemPanel/start.sh -d`
 
 Or create the desktop entry manually:
 
@@ -63,7 +60,7 @@ mkdir -p ~/.config/autostart
 Type=Application
 Name=Conky System Panel
 Comment=Clock and system monitor widget
-Exec=conky -c /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel/conkyrc -d
+Exec=/path/to/SystemPanel/start.sh -d
 X-GNOME-Autostart-enabled=true
 ```
 
@@ -75,14 +72,14 @@ Restart **only this widget** (never `killall conky` — it would kill the MusicA
 
 ```bash
 pkill -f 'SystemPanel/conkyrc'
-conky -c /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel/conkyrc -d
+cd /path/to/SystemPanel && ./start.sh -d
 ```
 
 Test each metric against system tools:
 
 ```bash
-node stats.js --mem && free -m
-node stats.js --disk / && df -h /
+./stats.js --mem && free -m
+./stats.js --disk / && df -h /
 ```
 
 If values look wrong, check the widget log: `tail -f /tmp/sp-conky.err`.
@@ -95,11 +92,12 @@ Everything is configured in `conkyrc`:
 - `own_window_argb_value`: background opacity (165 default; 255 = opaque)
 - `update_interval`: refresh interval in seconds
 - Colors (Catppuccin Mocha): `#cba6f7` bars, `#f5c2e7` clock/percentages, `#a6adc8` labels/dates, `#cdd6f4` text, `#313244` separator
+- The DATA disk line is shown only when its mount point exists (`${if_mounted /mnt/datos}`); change the path to your own data disk, or delete the line entirely
 
 ## 6. Uninstall
 
 ```bash
 rm ~/.config/autostart/systempanel.desktop
 pkill -f 'SystemPanel/conkyrc'
-rm -r /mnt/datos/Proyectos/Shell/Conky/Main/SystemPanel
+rm -r /path/to/SystemPanel
 ```

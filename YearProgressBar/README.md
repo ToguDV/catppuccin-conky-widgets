@@ -13,14 +13,14 @@ Console command and desktop widget that show the progress of the current year: p
 ### 1. Console command `yearprogress`
 
 ```bash
-cd /mnt/datos/Proyectos/Shell/Conky/Main/YearProgressBar
+cd /path/to/YearProgressBar
 npm link
 ```
 
 This makes the `yearprogress` command available globally in any terminal (Linux and Windows with npm). It can also be run without installing:
 
 ```bash
-node /mnt/datos/Proyectos/Shell/Conky/Main/YearProgressBar/yearprogress.js
+node /path/to/YearProgressBar/yearprogress.js
 ```
 
 ### 2. Desktop widget (Conky)
@@ -31,16 +31,19 @@ Install Conky:
 sudo apt install conky-all
 ```
 
-Start the widget:
+Start the widget (all paths are relative, no configuration needed):
 
 ```bash
-conky -c /mnt/datos/Proyectos/Shell/Conky/Main/YearProgressBar/conkyrc -d
+cd /path/to/YearProgressBar
+./start.sh -d
 ```
+
+(`./start.sh` without `-d` runs in the foreground, useful to see errors.)
 
 **Autostart on login** (Linux Mint: Menu → Preferences → Startup Applications):
 
 - Name: `Conky Year Progress`
-- Command: `conky -c /mnt/datos/Proyectos/Shell/Conky/Main/YearProgressBar/conkyrc -d`
+- Command: `/path/to/YearProgressBar/start.sh -d`
 
 Or create `~/.config/autostart/conky-yearprogress.desktop` manually:
 
@@ -49,7 +52,7 @@ Or create `~/.config/autostart/conky-yearprogress.desktop` manually:
 Type=Application
 Name=Conky Year Progress
 Comment=Year progress widget
-Exec=conky -c /mnt/datos/Proyectos/Shell/Conky/Main/YearProgressBar/conkyrc -d
+Exec=/path/to/YearProgressBar/start.sh -d
 X-GNOME-Autostart-enabled=true
 ```
 
@@ -58,7 +61,7 @@ X-GNOME-Autostart-enabled=true
 Use absolute paths in the desklet config (the desklet runs with an empty PATH):
 
 ```
-/home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/YearProgressBar/yearprogress.js
+/path/to/your/node /path/to/YearProgressBar/yearprogress.js
 ```
 
 ## Usage
@@ -95,7 +98,8 @@ The `conkyrc` file in this directory controls everything. Common settings:
 Reload after editing:
 
 ```bash
-killall conky && conky -c /mnt/datos/Proyectos/Shell/Conky/Main/YearProgressBar/conkyrc -d
+pkill -f 'YearProgressBar/conkyrc'
+cd /path/to/YearProgressBar && ./start.sh -d
 ```
 
 ## Uninstall
@@ -103,7 +107,7 @@ killall conky && conky -c /mnt/datos/Proyectos/Shell/Conky/Main/YearProgressBar/
 ```bash
 npm rm -g yearprogress   # remove the global command
 rm ~/.config/autostart/conky-yearprogress.desktop  # remove autostart entry
-killall conky            # close the widget
+pkill -f 'YearProgressBar/conkyrc'   # close the widget
 ```
 
 ## Project structure

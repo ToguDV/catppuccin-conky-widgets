@@ -20,11 +20,14 @@ DATA █████████░░░░░░░░░░░  45
 
 ## Installation
 
-Start the widget:
+Copy the `SystemPanel` folder anywhere (all paths are relative). Start the widget from inside the folder:
 
 ```bash
-conky -c /mnt/datos/Proyectos/Shell/SystemPanel/conkyrc -d
+cd /path/to/SystemPanel
+./start.sh -d
 ```
+
+(`./start.sh` without `-d` runs in the foreground, useful to see errors.)
 
 **Autostart on login** (`~/.config/autostart/systempanel.desktop`):
 
@@ -33,7 +36,7 @@ conky -c /mnt/datos/Proyectos/Shell/SystemPanel/conkyrc -d
 Type=Application
 Name=Conky System Panel
 Comment=Clock and system monitor widget
-Exec=conky -c /mnt/datos/Proyectos/Shell/SystemPanel/conkyrc -d
+Exec=/path/to/SystemPanel/start.sh -d
 X-GNOME-Autostart-enabled=true
 ```
 
@@ -46,7 +49,7 @@ Reads `/proc` and `fs.statfsSync` (no dbus → no flickering). All values in `%`
 | (no flag) | Full demo layout | — |
 | `--cpu` / `--mem` / `--swap` | One full line per metric | — |
 | `--disk <path>` | Disk line (label ROOT/DATA by path) | — |
-| `--cpu-bar` / `--cpu-pct` | Bar only / percentage only | `${execpi 60 ... --cpu-bar}${color #f5c2e7}${execpi 60 ... --cpu-pct}` |
+| `--cpu-bar` / `--cpu-pct` | Bar only / percentage only | `${execpi 60 ./stats.js --cpu-bar}${color #f5c2e7}${execpi 60 ./stats.js --cpu-pct}` |
 | `--mem-bar` / `--mem-pct` | Same, for RAM | idem |
 | `--swap-bar` / `--swap-pct` | Same, for swap (empty if 0) | idem |
 | `--disk-bar <path>` / `--disk-pct <path>` | Same, for a disk | idem |
@@ -71,7 +74,7 @@ Reload **only this widget** (never `killall conky`, it would kill the music visu
 
 ```bash
 pkill -f 'SystemPanel/conkyrc'
-conky -c /mnt/datos/Proyectos/Shell/SystemPanel/conkyrc -d
+cd /path/to/SystemPanel && ./start.sh -d
 ```
 
 ## Project structure

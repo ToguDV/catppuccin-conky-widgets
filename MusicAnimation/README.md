@@ -29,15 +29,15 @@ An audio-reactive symmetric wave visualizer rendered on your desktop with **Conk
    sudo apt install cava conky-all
    ```
 
-2. **Copy the project anywhere you like** (paths inside the scripts are resolved relative to the project folder, so it works from any location):
+2. **Copy the project anywhere you like** — all paths are relative, so it works from any location with no configuration:
 
    ```bash
-   git clone <this-repo> ~/.config/conky/music-animation
+   git clone <this-repo>
    # or just copy the folder somewhere, e.g.:
-   # cp -r music-animation /mnt/datos/Proyectos/Shell/Conky/Main/MusicAnimation
+   cp -r music-animation ~/.config/conky/music-animation
    ```
 
-3. **Edit `conkyrc`** to match your screen:
+3. **Edit `conkyrc`** to match your screen (this is the only thing you need to change):
 
    ```lua
    minimum_height = 540,   -- half your screen height
@@ -46,16 +46,16 @@ An audio-reactive symmetric wave visualizer rendered on your desktop with **Conk
    gap_x = 0,              -- horizontal offset
    gap_y = -40,            -- negative pulls the wave down, positive raises it
    alignment = 'bottom_middle',
-   lua_load = '/ABSOLUTE/PATH/TO/music-animation/visualizer.lua',  -- <- must be an absolute path
    ```
 
+   - `lua_load` is already set to `./visualizer.lua` (relative) — **do not edit it**.
    - If you want the wave full-screen centered, use `alignment = 'middle_middle'`, `minimum_width = <screen width> - 8`, `minimum_height = <screen height>`.
-   - The `lua_load` path must be absolute (change it to your project location).
 
 4. **Run it**
 
    ```bash
-   conky -c /path/to/music-animation/conkyrc
+   ./start.sh          # foreground (to see errors)
+   ./start.sh -d       # background / daemon
    ```
 
    Play some music — the wave appears and reacts. Stop the music and it fades out.
@@ -103,7 +103,7 @@ Create `~/.config/autostart/music-animation.desktop`:
 Type=Application
 Name=Conky Music Animation
 Comment=Audio visualizer wave
-Exec=conky -c /path/to/music-animation/conkyrc -d
+Exec=/path/to/music-animation/start.sh -d
 X-GNOME-Autostart-enabled=true
 ```
 
@@ -120,7 +120,7 @@ Cava is spawned by the Lua script itself, so conky is the only process you need 
 
 | Problem | Fix |
 |---|---|
-| Nothing appears | Check `conky -v` includes Cairo in the Lua bindings; check you have audio playing; verify the `lua_load` path is absolute |
+| Nothing appears | Check `conky -v` includes Cairo in the Lua bindings; check you have audio playing; launch with `./start.sh` (without `-d`) from the project folder and read the errors |
 | "module 'cairo_xlib' not found" | Not needed: this project only requires the `cairo` module (conky-all ≥ 1.19) |
 | Wave doesn't react to music | Make sure audio actually plays through your default sink; check `method = pulse` in `config` |
 | Wave crosses the taskbar | Raise the window: increase `gap_y` in `conkyrc` and/or lower `amplitude` in `config` |
