@@ -30,7 +30,7 @@ sudo apt install conky-all nodejs cava curl
 1. **Download the project:**
 
    ```bash
-   git clone https://github.com/your-user/your-repo ~/conky-widgets
+   git clone https://github.com/ToguDV/catppuccin-conky-widgets ~/conky-widgets
    ```
 
 2. **Start a widget:**

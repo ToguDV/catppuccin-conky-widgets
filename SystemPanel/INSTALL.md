@@ -16,7 +16,7 @@ Installation guide for the SystemPanel desktop widget (clock + system monitor fo
 Clone or copy the `SystemPanel` folder anywhere — all paths inside are relative, so there is nothing to configure:
 
 ```bash
-git clone https://github.com/your-user/your-repo ~/.config/conky
+git clone https://github.com/ToguDV/catppuccin-conky-widgets ~/.config/conky
 # or: cp -r SystemPanel /any/where/you/like
 ```
 
