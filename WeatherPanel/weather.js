@@ -3,7 +3,7 @@
 
 const fs = require('fs');
 const CACHE = '/tmp/weather.json';
-const CACHE_TTL = 30 * 60 * 1000;
+const CACHE_TTL = 15 * 60 * 1000;
 const FALLBACK_CITY = process.env.WEATHER_CITY || 'Madrid';
 
 const WMO = {
@@ -70,7 +70,7 @@ async function getWeather() {
   const loc = await getLocation();
   const url = 'https://api.open-meteo.com/v1/forecast'
     + `?latitude=${loc.lat}&longitude=${loc.lon}`
-    + '&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m'
+    + '&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,precipitation'
     + '&daily=weather_code,temperature_2m_max,temperature_2m_min'
     + '&forecast_days=5&timezone=auto';
   const r = await fetch(url);
@@ -89,11 +89,24 @@ function windDir(deg) {
 const flag = process.argv[2];
 const arg = process.argv[3];
 
+function printBlock({ data }) {
+  const c = data.current;
+  const [sym, label] = wmo(c.weather_code);
+  const line = (art, text) => console.log(art.padEnd(11) + text);
+  line('    \\   /', `${sym} ${label}`);
+  line('     .-.', `${Math.round(c.temperature_2m)}° (${Math.round(c.apparent_temperature)}°)`);
+  line('  (   )', `← ${Math.round(c.wind_speed_10m)} km/h ${windDir(c.wind_direction_10m)}`);
+  line('     `-´', `${c.relative_humidity_2m}%`);
+  line('    /   \\', `${c.precipitation} mm`);
+}
+
 getWeather()
   .then(({ loc, data }) => {
     const c = data.current;
     const d = data.daily;
-    if (flag === '--loc') {
+    if (flag === '--fallback-block') {
+      printBlock({ data });
+    } else if (flag === '--loc') {
       console.log(`${loc.name}, ${loc.country}`);
     } else if (flag === '--temp') {
       console.log(Math.round(c.temperature_2m) + '°');
@@ -124,6 +137,15 @@ getWeather()
     }
   })
   .catch((e) => {
+    if (flag === '--fallback-block') {
+      try {
+        const cached = JSON.parse(fs.readFileSync(CACHE, 'utf8'));
+        printBlock(cached);
+      } catch (e2) {
+        process.exit(1);
+      }
+      return;
+    }
     if (fs.existsSync(CACHE)) {
       const cached = JSON.parse(fs.readFileSync(CACHE, 'utf8'));
       const c = cached.data.current;
