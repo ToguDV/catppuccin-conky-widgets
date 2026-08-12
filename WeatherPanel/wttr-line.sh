@@ -10,7 +10,7 @@ if [ ! -f "$CACHE" ] || [ $(( $(date +%s) - $(stat -c %Y "$CACHE") )) -ge $TTL ]
   exec 9>/tmp/wttr.lock
   if flock -n 9; then
     if [ ! -f "$CACHE" ] || [ $(( $(date +%s) - $(stat -c %Y "$CACHE") )) -ge $TTL ]; then
-      curl -s --max-time 10 "wttr.in/?0T" 2>/dev/null | sed 1,2d > /tmp/wttr.tmp
+      curl -sf --max-time 10 "wttr.in/?0T" 2>/dev/null | sed 1,2d > /tmp/wttr.tmp
       if [ -s /tmp/wttr.tmp ]; then
         mv /tmp/wttr.tmp "$CACHE"
       else
@@ -23,7 +23,7 @@ fi
 
 if [ -s "$CACHE" ] && [ $(( $(date +%s) - $(stat -c %Y "$CACHE") )) -lt $TTL ]; then
   src="$CACHE"
-elif [ -s "$FB" ]; then
+elif [ -s "$FB" ] && [ $(( $(date +%s) - $(stat -c %Y "$FB") )) -lt $TTL ]; then
   src="$FB"
 else
   src="$CACHE"
