@@ -1,0 +1,13 @@
+{
+  "name": "yearprogress",
+  "version": "0.1.0",
+  "description": "Shows how much of the year has elapsed as a progress bar",
+  "main": "yearprogress.js",
+  "bin": {
+    "yearprogress": "./yearprogress.js"
+  },
+  "scripts": {
+    "start": "node yearprogress.js"
+  },
+  "license": "MIT"
+}

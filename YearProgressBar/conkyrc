@@ -1,0 +1,32 @@
+conky.config = {
+  update_interval = 60,
+  double_buffer = true,
+  own_window = true,
+  own_window_type = 'desktop',
+  own_window_transparent = false,
+  own_window_argb_visual = true,
+  own_window_colour = '1e1e2e',
+  own_window_argb_value = 165,
+  own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+  background = true,
+  alignment = 'top_right',
+  gap_x = 40,
+  gap_y = 40,
+  border_width = 0,
+  draw_shades = false,
+  draw_outline = false,
+  draw_borders = false,
+  draw_graph_borders = false,
+  uppercase = false,
+  default_color = 'cdd6f4',
+  use_xft = true,
+  font = 'DejaVu Sans Mono:size=9',
+  minimum_width = 260
+}
+
+conky.text = [[
+${voffset 6}${font DejaVu Sans Mono:size=9}${color #cba6f7}YEAR ${color #cdd6f4}2026${color #a6adc8} · ${time %d/%m/%Y}${alignr}${color #a6adc8}DAY ${execpi 300 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/YearProgressBar/yearprogress.js --days}
+${voffset 4}${font DejaVu Sans Mono:size=14}${color #cba6f7}${execpi 300 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/YearProgressBar/yearprogress.js --bar}${color}
+${voffset 3}${alignc}${font DejaVu Sans Mono:size=11}${color #f5c2e7}${execpi 300 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/YearProgressBar/yearprogress.js --percent}%${color}${color #a6adc8}  ·  ${execpi 300 /home/togu/.nvm/versions/node/v24.14.0/bin/node /mnt/datos/Proyectos/Shell/Conky/Main/YearProgressBar/yearprogress.js --days-left} days left
+${voffset 6}
+]]
