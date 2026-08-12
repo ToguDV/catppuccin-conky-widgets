@@ -25,17 +25,17 @@ conky.config = {
 }
 
 conky.text = [[
-${voffset 4}${color #f9e2af}${execpi 900 ./wttr-line.sh 1 1-11}${color #cdd6f4}${execpi 900 ./wttr-line.sh 1 12-}
-${execpi 900 ./wttr-line.sh 2}
-${execpi 900 ./wttr-line.sh 3}
-${execpi 900 ./wttr-line.sh 4}
-${color #f9e2af}${execpi 900 ./wttr-line.sh 5 1-11}${color #cdd6f4}${execpi 900 ./wttr-line.sh 5 12-}
+${voffset 4}${voffset 4}${execpi 900 ./weather.js --color-art}${execpi 900 ./wttr-line.sh 1 1-11}${color #a6adc8}${execpi 900 ./wttr-line.sh 1 12-}
+${execpi 900 ./weather.js --color-art}${execpi 900 ./wttr-line.sh 2 1-11}${execpi 900 ./weather.js --color-temp}${execpi 900 ./wttr-line.sh 2 12-}${color #cdd6f4}
+${execpi 900 ./weather.js --color-art}${execpi 900 ./wttr-line.sh 3 1-17}${color #cdd6f4}${execpi 900 ./wttr-line.sh 3 18-}
+${execpi 900 ./weather.js --color-art}${execpi 900 ./wttr-line.sh 4 1-11}${color #cdd6f4}${execpi 900 ./wttr-line.sh 4 12-}
+${execpi 900 ./weather.js --color-art}${execpi 900 ./wttr-line.sh 5 1-11}${color #cdd6f4}${execpi 900 ./wttr-line.sh 5 12-}
 ${voffset 4}${color #313244}${hr}${color}
-${voffset 2}${color #a6adc8}${execpi 900 ./weather.js --loc}${color}
-${color #cdd6f4}${execpi 900 ./weather.js --day 0}${alignr}${color #f5c2e7}${execpi 900 ./weather.js --temps 0}${color}
-${color #cdd6f4}${execpi 900 ./weather.js --day 1}${alignr}${color #f5c2e7}${execpi 900 ./weather.js --temps 1}${color}
-${color #cdd6f4}${execpi 900 ./weather.js --day 2}${alignr}${color #f5c2e7}${execpi 900 ./weather.js --temps 2}${color}
-${color #cdd6f4}${execpi 900 ./weather.js --day 3}${alignr}${color #f5c2e7}${execpi 900 ./weather.js --temps 3}${color}
-${color #cdd6f4}${execpi 900 ./weather.js --day 4}${alignr}${color #f5c2e7}${execpi 900 ./weather.js --temps 4}${color}
+${voffset 2}${color #cba6f7}${execpi 900 ./weather.js --loc}${color}
+${execpi 900 ./weather.js --day 0}${alignr}${execpi 900 ./weather.js --temps 0}${color}
+${execpi 900 ./weather.js --day 1}${alignr}${execpi 900 ./weather.js --temps 1}${color}
+${execpi 900 ./weather.js --day 2}${alignr}${execpi 900 ./weather.js --temps 2}${color}
+${execpi 900 ./weather.js --day 3}${alignr}${execpi 900 ./weather.js --temps 3}${color}
+${execpi 900 ./weather.js --day 4}${alignr}${execpi 900 ./weather.js --temps 4}${color}
 ${voffset 6}
 ]]

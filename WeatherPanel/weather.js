@@ -41,6 +41,29 @@ function wmo(code) {
   return WMO[code] || ['?', 'Unknown'];
 }
 
+const COND_COLORS = {
+  0: '#cba6f7', 1: '#cba6f7', 2: '#cba6f7',
+  3: '#a6adc8', 45: '#a6adc8', 48: '#a6adc8',
+  51: '#f5c2e7', 53: '#f5c2e7', 55: '#f5c2e7', 56: '#f5c2e7', 57: '#f5c2e7',
+  61: '#f5c2e7', 63: '#f5c2e7', 65: '#f5c2e7', 66: '#f5c2e7', 67: '#f5c2e7',
+  71: '#f5c2e7', 73: '#f5c2e7', 75: '#f5c2e7', 77: '#f5c2e7',
+  80: '#f5c2e7', 81: '#f5c2e7', 82: '#f5c2e7',
+  85: '#f5c2e7', 86: '#f5c2e7',
+  95: '#f5c2e7', 96: '#f5c2e7', 99: '#f5c2e7',
+};
+
+function condColor(code) {
+  return COND_COLORS[code] || '#a6adc8';
+}
+
+function tempColor(t) {
+  return '#f5c2e7';
+}
+
+function colorTag(c) {
+  return '${color ' + c + '}';
+}
+
 async function getLocation() {
   try {
     const r = await fetch('http://ip-api.com/json');
@@ -95,7 +118,7 @@ function printBlock({ data }) {
   const line = (art, text) => console.log(art.padEnd(11) + text);
   line('    \\   /', `${sym} ${label}`);
   line('     .-.', `${Math.round(c.temperature_2m)}° (${Math.round(c.apparent_temperature)}°)`);
-  line('  (   )', `← ${Math.round(c.wind_speed_10m)} km/h ${windDir(c.wind_direction_10m)}`);
+  console.log('  (   )       ' + '←' + ` ${Math.round(c.wind_speed_10m)} km/h ${windDir(c.wind_direction_10m)}`);
   line('     `-´', `${c.relative_humidity_2m}%`);
   line('    /   \\', `${c.precipitation} mm`);
 }
@@ -121,14 +144,21 @@ getWeather()
       const hum = c.relative_humidity_2m;
       const wind = `${Math.round(c.wind_speed_10m)} km/h ${windDir(c.wind_direction_10m)}`;
       console.log(`Feels ${Math.round(c.apparent_temperature)}°  ·  ${hum}%  ·  ${wind}`);
+    } else if (flag === '--color-art') {
+      console.log(colorTag('#cba6f7'));
+    } else if (flag === '--color-cond') {
+      console.log(colorTag(condColor(c.weather_code)));
+    } else if (flag === '--color-temp') {
+      console.log(colorTag(tempColor(c.temperature_2m)));
     } else if (flag === '--day') {
       const i = parseInt(arg || '0', 10);
       const [sym, label] = wmo(d.weather_code[i]);
       const name = i === 0 ? 'Today' : new Date(d.time[i] + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'short' });
-      console.log(`${name.padEnd(6)}${sym} ${label}`);
+      const dayColor = i === 0 ? '#f5c2e7' : '#cba6f7';
+      console.log(colorTag(dayColor) + name.padEnd(6) + colorTag(condColor(d.weather_code[i])) + sym + colorTag('#a6adc8') + ' ' + label);
     } else if (flag === '--temps') {
       const i = parseInt(arg || '0', 10);
-      console.log(`${Math.round(d.temperature_2m_max[i])}°/${Math.round(d.temperature_2m_min[i])}°`);
+      console.log(colorTag(tempColor(d.temperature_2m_max[i])) + `${Math.round(d.temperature_2m_max[i])}°/${Math.round(d.temperature_2m_min[i])}°`);
     } else {
       console.log(`LOC   ${loc.name}, ${loc.country}`);
       console.log(`NOW   ${Math.round(c.temperature_2m)}° ${wmo(c.weather_code)[1]}`);
