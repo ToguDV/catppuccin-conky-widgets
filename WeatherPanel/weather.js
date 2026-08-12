@@ -4,7 +4,7 @@
 const fs = require('fs');
 const CACHE = '/tmp/weather.json';
 const CACHE_TTL = 30 * 60 * 1000;
-const FALLBACK_CITY = 'Madrid';
+const FALLBACK_CITY = process.env.WEATHER_CITY || 'Madrid';
 
 const WMO = {
   0: ['☀', 'Clear'],

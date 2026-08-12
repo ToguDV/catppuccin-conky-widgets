@@ -25,7 +25,7 @@ conky.config = {
 }
 
 conky.text = [[
-${voffset 6}${font DejaVu Sans Mono:size=9}${color #cba6f7}YEAR ${color #cdd6f4}2026${color #a6adc8} · ${time %d/%m/%Y}${alignr}${color #a6adc8}DAY ${execpi 300 ./yearprogress.js --days}
+${voffset 6}${font DejaVu Sans Mono:size=9}${color #cba6f7}YEAR ${color #cdd6f4}${time %Y}${color #a6adc8} · ${time %d/%m/%Y}${alignr}${color #a6adc8}DAY ${execpi 300 ./yearprogress.js --days}
 ${voffset 4}${font DejaVu Sans Mono:size=14}${color #cba6f7}${execpi 300 ./yearprogress.js --bar}${color}
 ${voffset 3}${alignc}${font DejaVu Sans Mono:size=11}${color #f5c2e7}${execpi 300 ./yearprogress.js --percent}%${color}${color #a6adc8}  ·  ${execpi 300 ./yearprogress.js --days-left} days left
 ${voffset 6}

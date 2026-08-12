@@ -93,7 +93,7 @@ The `conkyrc` file in this directory controls everything. Common settings:
 - `own_window_argb_value`: background opacity (0 = invisible, 255 = opaque)
 - Colors: Catppuccin Mocha palette by default (`#cba6f7` purple, `#f5c2e7` pink, `#cdd6f4` text, `#a6adc8` gray)
 - `update_interval`: refresh interval in seconds (the `execpi 300` calls cache for 5 minutes)
-- The displayed year is edited as literal text in `conky.text` (`YEAR 2026` line)
+- The year is dynamic (`${time %Y}`) — nothing to edit each year
 
 Reload after editing:
 

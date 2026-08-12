@@ -69,7 +69,7 @@ The 5-day forecast and location come from **Open-Meteo** (`api.open-meteo.com`) 
 
 Location resolution, with fallback:
 1. IP geolocation via `ip-api.com` (no token)
-2. If it fails, fixed city via Open-Meteo Geocoding — edit `FALLBACK_CITY` in `weather.js`
+2. If it fails, fixed city via Open-Meteo Geocoding — `WEATHER_CITY` env var, or edit `FALLBACK_CITY` in `weather.js` (defaults to `Madrid`)
 
 Data is cached in `/tmp/weather.json` for 30 minutes, so the API is hit at most once per 30 min regardless of how many flags conky calls.
 
@@ -94,7 +94,7 @@ The `conkyrc` file controls everything:
 - `alignment` and `gap_x` / `gap_y`: screen position (`gap_y = 400` places it below `SystemPanel`)
 - `own_window_argb_value`: background opacity (165 default)
 - Colors: Catppuccin Mocha (`#f5c2e7` temperatures, `#cdd6f4` text, `#a6adc8` labels, `#313244` separator)
-- `FALLBACK_CITY` in `weather.js`: city used when IP geolocation fails
+- `WEATHER_CITY` env var (or `FALLBACK_CITY` in `weather.js`): city used when IP geolocation fails
 - Symbols (☀ ◔ ◑ ☁ ☂ ☃ ⚡) are chosen to render in DejaVu Sans Mono; the map is at the top of `weather.js` (WMO codes)
 - Header: edit the `curl` line in `conkyrc` (e.g. add `lang=es`, or `m` for metric, or `wttr.is` as fallback domain)
 
