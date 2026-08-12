@@ -8,7 +8,7 @@ TTL=900
 
 if [ ! -f "$CACHE" ] || [ $(( $(date +%s) - $(stat -c %Y "$CACHE") )) -ge $TTL ]; then
   exec 9>/tmp/wttr.lock
-  if flock -n 9; then
+  if flock 9; then
     if [ ! -f "$CACHE" ] || [ $(( $(date +%s) - $(stat -c %Y "$CACHE") )) -ge $TTL ]; then
       curl -sf --max-time 10 "wttr.in/?0T" 2>/dev/null | sed 1,2d > /tmp/wttr.tmp
       if [ -s /tmp/wttr.tmp ]; then
