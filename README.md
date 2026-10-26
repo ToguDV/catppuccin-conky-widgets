@@ -8,7 +8,7 @@ A collection of independent desktop widgets for Linux, powered by [Conky](https:
 |---|---|---|
 | [YearProgressBar](YearProgressBar/) | Year progress bar, percentage, days left | Node.js (Conky optional) |
 | [SystemPanel](SystemPanel/) | Clock + CPU / RAM / swap / disk bars | Node.js |
-| [WeatherPanel](WeatherPanel/) | Current weather + 5-day forecast | Node.js, curl |
+| [WeatherPanel](WeatherPanel/) | Current weather + 5-day forecast | Node.js |
 | [MusicAnimation](MusicAnimation/) | Audio-reactive wave on the desktop | Cava + sound |
 
 Each widget lives in its own folder and is fully independent. You can use one, two, or all four — they do not conflict.
@@ -19,12 +19,11 @@ Each widget lives in its own folder and is fully independent. You can use one, t
 - **Conky**: `sudo apt install conky-all`
 - **Node.js** — any modern version
 - **Cava** (only for MusicAnimation): `sudo apt install cava`
-- **curl** (only for WeatherPanel)
 
 The easiest way is to install everything at once:
 
 ```bash
-sudo apt install conky-all nodejs cava curl
+sudo apt install conky-all nodejs cava
 ```
 
 ## Quick start
